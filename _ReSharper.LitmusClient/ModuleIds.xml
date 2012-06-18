@@ -1,6 +1,0 @@
-<Modules>
-  <Module PersistentId="9E9903FA-F8BD-429A-AB0F-A54602952DCE" ModuleId="LitmusClient" />
-  <Module PersistentId="7520C4BE-C745-4FD4-B731-095B3E26AF6A" ModuleId="LitmusClientTests" />
-  <Module PersistentId="d:Miscellaneous Files" ModuleId="RestSharp" />
-  <Module PersistentId="RestSharp, Version=103.1.0.0, Culture=neutral" ModuleId="RestSharp_1" />
-</Modules>
