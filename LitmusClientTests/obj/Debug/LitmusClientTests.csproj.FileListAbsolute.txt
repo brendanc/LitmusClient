@@ -1,0 +1,14 @@
+C:\Projects\LitmusClient\LitmusClientTests\bin\Debug\LitmusClientTests.dll
+C:\Projects\LitmusClient\LitmusClientTests\bin\Debug\LitmusClientTests.pdb
+C:\Projects\LitmusClient\LitmusClientTests\bin\Debug\LitmusClient.dll
+C:\Projects\LitmusClient\LitmusClientTests\bin\Debug\nunit.core.dll
+C:\Projects\LitmusClient\LitmusClientTests\bin\Debug\nunit.framework.dll
+C:\Projects\LitmusClient\LitmusClientTests\bin\Debug\nunit.core.interfaces.dll
+C:\Projects\LitmusClient\LitmusClientTests\bin\Debug\LitmusClient.pdb
+C:\Projects\LitmusClient\LitmusClientTests\bin\Debug\nunit.framework.xml
+C:\Projects\LitmusClient\LitmusClientTests\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\LitmusClient\LitmusClientTests\obj\Debug\LitmusClientTests.dll
+C:\Projects\LitmusClient\LitmusClientTests\obj\Debug\LitmusClientTests.pdb
+C:\Projects\LitmusClient\LitmusClientTests\bin\Debug\RestSharp.dll
+C:\Projects\LitmusClient\LitmusClientTests\bin\Debug\RestSharp.pdb
+C:\Projects\LitmusClient\LitmusClientTests\bin\Debug\RestSharp.xml
