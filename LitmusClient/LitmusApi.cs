@@ -41,6 +41,28 @@ namespace LitmusClient
             var clients =  ExecuteGet<List<TestingApplication>>(request);
             return clients;
         }
+
+        /// <summary>
+        /// Fetches all this user's default email clients to test on.
+        /// </summary>
+        /// <returns></returns>
+        public List<TestingApplication> GetDefaultEmailClients()
+        {
+            var request = new RestRequest("defaults/email.xml", Method.GET);
+            //because the Litmus defaults endpoint is a littler different from the testing_applications endpoint we need to do a little work
+            //to shoe horn the results into a TestingApplicaiton
+            request.OnBeforeDeserialization = response =>
+                                                  {
+                                                      response.Content = response.Content.Replace("defaults","testing_applications");
+                                                      response.Content = response.Content.Replace("<application>",
+                                                                                                  "<testing_application>");
+                                                      response.Content = response.Content.Replace("</application>",
+                                                                                                  "</testing_application>");
+
+                                                  };
+            var clients = ExecuteGet<List<TestingApplication>>(request);
+            return clients;
+        }
        
         /// <summary>
         /// Fetches all the available page clients we can test on
@@ -49,6 +71,28 @@ namespace LitmusClient
         public List<TestingApplication> GetPageClients()
         {
             var request = new RestRequest("pages/clients.xml", Method.GET);
+            var clients = ExecuteGet<List<TestingApplication>>(request);
+            return clients;
+        }
+
+        /// <summary>
+        /// Fetches all this user's default page clients to test on.
+        /// </summary>
+        /// <returns></returns>
+        public List<TestingApplication> GetDefaultPageClients()
+        {
+            var request = new RestRequest("defaults/page.xml", Method.GET);
+            //because the Litmus defaults endpoint is a littler different from the testing_applications endpoint we need to do a little work
+            //to shoe horn the results into a TestingApplicaiton
+            request.OnBeforeDeserialization = response =>
+            {
+                response.Content = response.Content.Replace("defaults", "testing_applications");
+                response.Content = response.Content.Replace("<application>",
+                                                            "<testing_application>");
+                response.Content = response.Content.Replace("</application>",
+                                                            "</testing_application>");
+
+            };
             var clients = ExecuteGet<List<TestingApplication>>(request);
             return clients;
         }

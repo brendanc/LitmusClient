@@ -67,6 +67,32 @@ namespace LitmusClientTests
         }
 
         [Test]
+        public void GetDefaultEmailClients_WithValidCredentials_ShouldReturnValidCollection()
+        {
+            var clients = client.GetDefaultEmailClients();
+            Assert.That(clients.Count, Is.GreaterThan(0));
+            foreach (var testingApplication in clients)
+            {
+                Assert.That(string.IsNullOrEmpty(testingApplication.ApplicationCode), Is.Not.True);
+                Assert.That(string.IsNullOrEmpty(testingApplication.ApplicationLongName), Is.Not.True);
+                Assert.That(string.IsNullOrEmpty(testingApplication.PlatformName), Is.Not.True);
+            }
+        }
+
+        [Test]
+        public void GetDefaultPageClients_WithValidCredentials_ShouldReturnValidCollection()
+        {
+            var clients = client.GetDefaultPageClients();
+            Assert.That(clients.Count, Is.GreaterThan(0));
+            foreach (var testingApplication in clients)
+            {
+                Assert.That(string.IsNullOrEmpty(testingApplication.ApplicationCode), Is.Not.True);
+                Assert.That(string.IsNullOrEmpty(testingApplication.ApplicationLongName), Is.Not.True);
+                Assert.That(string.IsNullOrEmpty(testingApplication.PlatformName), Is.Not.True);
+            }
+        }
+
+        [Test]
         public void GetTests_WithValidAccount_ShouldFetchTests()
         {
             var tests = client.GetTests();
