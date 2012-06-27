@@ -10,5 +10,3 @@ C:\Projects\LitmusClient\LitmusClientTests\obj\Debug\ResolveAssemblyReference.ca
 C:\Projects\LitmusClient\LitmusClientTests\obj\Debug\LitmusClientTests.dll
 C:\Projects\LitmusClient\LitmusClientTests\obj\Debug\LitmusClientTests.pdb
 C:\Projects\LitmusClient\LitmusClientTests\bin\Debug\RestSharp.dll
-C:\Projects\LitmusClient\LitmusClientTests\bin\Debug\RestSharp.pdb
-C:\Projects\LitmusClient\LitmusClientTests\bin\Debug\RestSharp.xml
