@@ -10,7 +10,7 @@ You will need your own Litmus account to use this library which you can get here
 _Create a Litmus EmailTest_
 
 ```c#
-  var client = new LitmusApi(new Account("YourSubDomain", "YourUserName, "YourPassword")); 
+  var client = new LitmusApi(new Account("YourSubDomain", "YourUserName", "YourPassword")); 
   var emailClients = new List<TestingApplication>();
   emailClients.Add(new TestingApplication() { ApplicationCode = "hotmail", ResultType = "email" });
   emailClients.Add(new TestingApplication() { ApplicationCode = "gmailnew", ResultType = "email" });
@@ -23,7 +23,7 @@ _Create a Litmus EmailTest_
 _Create a Litmus Page Test_ 
 
 ```c#
-  var client = new LitmusApi(new Account("YourSubDomain", "YourUserName, "YourPassword"));            
+  var client = new LitmusApi(new Account("YourSubDomain", "YourUserName", "YourPassword"));            
   var pageClients = new List<TestingApplication>();
   pageClients.Add(new TestingApplication() { ApplicationCode = "chrome2", ResultType = "page" });
   pageClients.Add(new TestingApplication() { ApplicationCode = "ie7", ResultType = "page" });
