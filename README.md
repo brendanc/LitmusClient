@@ -37,5 +37,4 @@ var test = client.CreatePageTest(pageClients, url);
 -  Litmus Docs: http://docs.litmus.com/w/page/18056603/Customer%20API%20documentation
 -  Litmus Customer Api liscensing terms:  http://docs.litmus.com/w/page/18056620/Customer%20API%3A%20Getting%20Started#licensing-terms
 -  Uses the excellent RestSharp library from https://github.com/restsharp
--  Currently it's awaiting resolution of a small RestSharp issue (https://github.com/restsharp/RestSharp/issues/269).  Until that is resolved use the RestSharp.dll included in the Components directory.
- 
+
