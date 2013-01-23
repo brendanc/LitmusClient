@@ -31,8 +31,12 @@ _Create a Litmus Page Test_
   var url = "http://github.com";
   var test = client.CreatePageTest(pageClients, url);
 
-
 ```
+
+_If you just want to use this library in your application:_
+
+- Download it from NuGet:  http://nuget.org/packages/LitmusClient/
+
 
 **References:**
 
