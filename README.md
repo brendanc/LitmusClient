@@ -23,16 +23,6 @@ var test = client.CreateEmailTest(emailClients, subject, "<html><body><p>This is
 _Create a Litmus Page Test_ 
 
 ```c#
-<<<<<<< HEAD
-  var client = new LitmusApi(new Account("YourSubDomain", "YourUserName, "YourPassword"));            
-  var pageClients = new List<TestingApplication>();
-  pageClients.Add(new TestingApplication() { ApplicationCode = "chrome2", ResultType = "page" });
-  pageClients.Add(new TestingApplication() { ApplicationCode = "ie7", ResultType = "page" });
-  pageClients.Add(new TestingApplication() { ApplicationCode = "ie6", ResultType = "page" });
-  var url = "http://github.com";
-  var test = client.CreatePageTest(pageClients, url);
-
-=======
 var client = new LitmusApi(new Account("YourSubDomain", "YourUserName", "YourPassword"));            
 var pageClients = new List<TestingApplication>();
 pageClients.Add(new TestingApplication() { ApplicationCode = "chrome2", ResultType = "page" });
@@ -40,7 +30,7 @@ pageClients.Add(new TestingApplication() { ApplicationCode = "ie7", ResultType =
 pageClients.Add(new TestingApplication() { ApplicationCode = "ie6", ResultType = "page" });
 var url = "http://github.com";
 var test = client.CreatePageTest(pageClients, url);
->>>>>>> 497fe494d35b668c7f444645e56a9f377ca3d31e
+
 ```
 
 _If you just want to use this library in your application:_
