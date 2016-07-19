@@ -1,10 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text.RegularExpressions;
 using LitmusClient;
 using LitmusClient.Litmus;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace LitmusClientTests
 {
@@ -30,9 +29,9 @@ namespace LitmusClientTests
                                       <use_defaults>false</use_defaults>
                                     </test_set>";
             var emailClients = new List<TestingApplication>();
-            emailClients.Add(new TestingApplication(){ApplicationCode = "hotmail",ResultType = "email"});
-            emailClients.Add(new TestingApplication() {ApplicationCode = "gmailnew", ResultType = "email"});
-            emailClients.Add(new TestingApplication() {ApplicationCode = "notes8", ResultType = "email"});
+            emailClients.Add(new TestingApplication() { ApplicationCode = "hotmail", ResultType = "email" });
+            emailClients.Add(new TestingApplication() { ApplicationCode = "gmailnew", ResultType = "email" });
+            emailClients.Add(new TestingApplication() { ApplicationCode = "notes8", ResultType = "email" });
             var request = new CreateEmailTestRequest(emailClients);
 
             var cleanSpacing = new Regex(@"\s+", RegexOptions.None);

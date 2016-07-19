@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using LitmusClient;
 using LitmusClient.Litmus;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace LitmusClientTests
 {
@@ -30,9 +30,9 @@ namespace LitmusClientTests
                                   <url>http://google.com</url>
                                 </test_set>";
             var pageClients = new List<TestingApplication>();
-            pageClients.Add(new TestingApplication(){ApplicationCode = "chrome2",ResultType = "page"});
-            pageClients.Add(new TestingApplication() {ApplicationCode = "ie7", ResultType = "page"});
-            pageClients.Add(new TestingApplication() {ApplicationCode = "ie6", ResultType = "page"});
+            pageClients.Add(new TestingApplication() { ApplicationCode = "chrome2", ResultType = "page" });
+            pageClients.Add(new TestingApplication() { ApplicationCode = "ie7", ResultType = "page" });
+            pageClients.Add(new TestingApplication() { ApplicationCode = "ie6", ResultType = "page" });
             var request = new CreatePageTestRequest(pageClients, "http://google.com");
 
             var cleanSpacing = new Regex(@"\s+", RegexOptions.None);

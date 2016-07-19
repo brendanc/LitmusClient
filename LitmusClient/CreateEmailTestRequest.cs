@@ -1,8 +1,7 @@
+using LitmusClient.Litmus;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml.Linq;
-using LitmusClient.Litmus;
 
 namespace LitmusClient
 {
@@ -11,7 +10,6 @@ namespace LitmusClient
     /// </summary>
     public class CreateEmailTestRequest : CreateRequest
     {
-
         /// <summary>
         /// Create request for an email test.  You can pass in a subject and body and it will be uploaded to Litmus or
         /// choose to not pass it in.  In this case you will get an email address on the TestSetVersion object, you will need to send
@@ -20,7 +18,7 @@ namespace LitmusClient
         /// <param name="testingApplications"></param>
         /// <param name="subject"></param>
         /// <param name="body"></param>
-        public CreateEmailTestRequest(List<TestingApplication> testingApplications,string subject = "",string body = "")
+        public CreateEmailTestRequest(List<TestingApplication> testingApplications, string subject = "", string body = "")
         {
             if (string.IsNullOrEmpty(subject) && !string.IsNullOrEmpty(body)) subject = "(No subject)";
             if (!string.IsNullOrEmpty(subject) && string.IsNullOrEmpty(body)) throw new ArgumentException("You can't pass in a subject and not pass in a body.");

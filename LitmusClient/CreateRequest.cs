@@ -1,7 +1,6 @@
-using System.Collections.Generic;
-using System.Security;
-using System.Xml.Linq;
 using LitmusClient.Litmus;
+using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace LitmusClient
 {
@@ -24,7 +23,7 @@ namespace LitmusClient
         /// Do you want to ignore the passed in collection and use your Litmus defailts?
         /// </summary>
         public bool UseDefaults { get; set; }
-        
+
         /// <summary>
         /// The XDocument that will be posted to Litmus
         /// </summary>
@@ -34,7 +33,7 @@ namespace LitmusClient
         /// Inheriting classes can add elements to the POST by adding them in here.
         /// </summary>
         protected List<XElement> ExtraElements { get; set; }
-       
+
         /// <summary>
         /// Generate the XDocument that will be posted to Litmus
         /// </summary>
@@ -64,10 +63,7 @@ namespace LitmusClient
                 }
             }
 
-
             SerializedRequest.Add(testSetEelemnt);
-
-         
         }
 
         /// <summary>

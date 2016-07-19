@@ -1,6 +1,6 @@
+using LitmusClient.Litmus;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using LitmusClient.Litmus;
 
 namespace LitmusClient
 {
@@ -11,12 +11,12 @@ namespace LitmusClient
         /// </summary>
         /// <param name="testingApplications"></param>
         /// <param name="url"></param>
-        public CreatePageTestRequest(List<TestingApplication>testingApplications,string url)
+        public CreatePageTestRequest(List<TestingApplication> testingApplications, string url)
         {
             this.Applications = testingApplications;
             this.Applications = testingApplications;
             ExtraElements = new List<XElement>();
-            ExtraElements.Add(new XElement("url",url));
+            ExtraElements.Add(new XElement("url", url));
         }
     }
 }

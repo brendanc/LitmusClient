@@ -10,7 +10,7 @@ namespace LitmusClient.Litmus
     {
         public int Id { get; set; }
         public string CheckState { get; set; }
-        
+
         public DateTime? ErrorAt { get; set; }
         public DateTime? FinishedAt { get; set; }
         public DateTime? StartedAt { get; set; }
@@ -20,7 +20,5 @@ namespace LitmusClient.Litmus
         public string ResultType { get; set; }
         public TestingApplication TestingApplication { get; set; }
         public List<ResultImage> ResultImages { get; set; }
-
- 
     }
 }

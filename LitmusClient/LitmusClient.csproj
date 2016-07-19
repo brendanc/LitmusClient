@@ -47,7 +47,11 @@
   <ItemGroup>
     <Compile Include="CreateEmailTestRequest.cs" />
     <Compile Include="CreatePageTestRequest.cs" />
+    <Compile Include="CreateReportRequest.cs" />
     <Compile Include="CreateRequest.cs" />
+    <Compile Include="Litmus\Report.cs" />
+    <Compile Include="Litmus\ReportContent.cs" />
+    <Compile Include="UpdateTestRequest.cs" />
     <Compile Include="Litmus\Account.cs" />
     <Compile Include="Litmus\Result.cs" />
     <Compile Include="Litmus\ResultImage.cs" />

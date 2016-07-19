@@ -1,8 +1,8 @@
-using System.Collections.Generic;
-using System.Net;
 using LitmusClient.Litmus;
 using RestSharp;
 using RestSharp.Deserializers;
+using System.Collections.Generic;
+using System.Net;
 
 namespace LitmusClient
 {
@@ -31,15 +31,82 @@ namespace LitmusClient
             return !string.IsNullOrEmpty(response.Content);
         }
 
+        #region Test Set Methods
+
         /// <summary>
-        /// Fetches all the available email clients we can test on.
+        /// Fetches the first page of existing tests for this account
         /// </summary>
         /// <returns></returns>
-        public List<TestingApplication> GetEmailClients()
+        public List<TestSet> GetTests()
         {
-            var request = new RestRequest("emails/clients.xml", Method.GET);
-            var clients =  ExecuteGet<List<TestingApplication>>(request);
-            return clients;
+            var request = new RestRequest("tests.xml", Method.GET);
+            var tests = ExecuteGet<List<TestSet>>(request);
+            return tests;
+        }
+
+        /// <summary>
+        /// Fetch a single test
+        /// </summary>
+        /// <param name="testId"></param>
+        /// <returns></returns>
+        public TestSet GetTest(int testId)
+        {
+            var testRequest = new RestRequest(string.Format("tests/{0}.xml", testId), Method.GET);
+            var test = ExecuteGet<TestSet>(testRequest);
+            return test;
+        }
+
+        public TestSet UpdateTest(int testId, bool publicSharing, string name)
+        {
+            var testRequest = new RestRequest(string.Format("tests/{0}.xml", testId), Method.GET);
+            testRequest.AddBody(new UpdateTestRequest(publicSharing, name));
+            var test = ExecutePut<TestSet>(testRequest);
+            return test;
+        }
+
+        #endregion Test Set Methods
+
+        /// <summary>
+        /// Use Litmus' poll endpoint to see when test results complete.  If no version is passed in default to 1.
+        /// </summary>
+        /// <param name="testSetId"></param>
+        /// <param name="version"></param>
+        /// <returns></returns>
+        public List<Result> PollForTestResults(int testSetId, int version = 1)
+        {
+            var pollRequest = new RestRequest(string.Format("tests/{0}/versions/{1}/poll.xml", testSetId, version), Method.GET);
+            var results = ExecuteGet<List<Result>>(pollRequest);
+            return results;
+        }
+
+        #region Email Methods
+
+        /// <summary>
+        /// Create an email test and return the TestSet.  In this case you will want to grab the test.TestSetVersions[0].UrlOrGuid
+        /// and send your email into that address.
+        /// </summary>
+        /// <param name="testingApplications"></param>
+        /// <returns></returns>
+        public TestSet CreateEmailTest(List<TestingApplication> testingApplications)
+        {
+            return CreateEmailTest(testingApplications, "", "");
+        }
+
+        /// <summary>
+        /// Create an email test passing in a subject and body to test.
+        /// </summary>
+        /// <param name="testingApplications"></param>
+        /// <param name="subject"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
+        public TestSet CreateEmailTest(List<TestingApplication> testingApplications, string subject, string body)
+        {
+            var request = new RestRequest("emails.xml", Method.POST);
+            request.XmlSerializer = new LitmusPostSerializer();
+            request.AddHeader("Accept", "application/xml");
+            request.AddBody(new CreateEmailTestRequest(testingApplications, subject, body));
+            var test = ExecutePost<TestSet>(request);
+            return test;
         }
 
         /// <summary>
@@ -52,27 +119,46 @@ namespace LitmusClient
             //because the Litmus defaults endpoint is a littler different from the testing_applications endpoint we need to do a little work
             //to shoe horn the results into a TestingApplicaiton
             request.OnBeforeDeserialization = response =>
-                                                  {
-                                                      response.Content = response.Content.Replace("defaults","testing_applications");
-                                                      response.Content = response.Content.Replace("<application>",
-                                                                                                  "<testing_application>");
-                                                      response.Content = response.Content.Replace("</application>",
-                                                                                                  "</testing_application>");
-
-                                                  };
+            {
+                response.Content = response.Content.Replace("defaults", "testing_applications");
+                response.Content = response.Content.Replace("<application>",
+                                                            "<testing_application>");
+                response.Content = response.Content.Replace("</application>",
+                                                            "</testing_application>");
+            };
             var clients = ExecuteGet<List<TestingApplication>>(request);
             return clients;
         }
-       
+
         /// <summary>
-        /// Fetches all the available page clients we can test on
+        /// Fetches all the available email clients we can test on.
         /// </summary>
         /// <returns></returns>
-        public List<TestingApplication> GetPageClients()
+        public List<TestingApplication> GetEmailClients()
         {
-            var request = new RestRequest("pages/clients.xml", Method.GET);
+            var request = new RestRequest("emails/clients.xml", Method.GET);
             var clients = ExecuteGet<List<TestingApplication>>(request);
             return clients;
+        }
+
+        #endregion Email Methods
+
+        #region Page Methods
+
+        /// <summary>
+        /// Create a Litmus page test.
+        /// </summary>
+        /// <param name="testingApplications"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public TestSet CreatePageTest(List<TestingApplication> testingApplications, string url)
+        {
+            var request = new RestRequest("pages.xml", Method.POST);
+            request.XmlSerializer = new LitmusPostSerializer();
+            request.AddHeader("Accept", "application/xml");
+            request.AddBody(new CreatePageTestRequest(testingApplications, url));
+            var test = ExecutePost<TestSet>(request);
+            return test;
         }
 
         /// <summary>
@@ -91,91 +177,50 @@ namespace LitmusClient
                                                             "<testing_application>");
                 response.Content = response.Content.Replace("</application>",
                                                             "</testing_application>");
-
             };
             var clients = ExecuteGet<List<TestingApplication>>(request);
             return clients;
         }
 
         /// <summary>
-        /// Fetches the first page of existing tests for this account
+        /// Fetches all the available page clients we can test on
         /// </summary>
         /// <returns></returns>
-        public List<TestSet>GetTests()
+        public List<TestingApplication> GetPageClients()
         {
-            var request = new RestRequest("tests.xml", Method.GET);
-            var tests = ExecuteGet<List<TestSet>>(request);
-            return tests; 
+            var request = new RestRequest("pages/clients.xml", Method.GET);
+            var clients = ExecuteGet<List<TestingApplication>>(request);
+            return clients;
         }
 
-        /// <summary>
-        /// Fetch a single test 
-        /// </summary>
-        /// <param name="testId"></param>
-        /// <returns></returns>
-        public TestSet GetTest(int testId)
+        #endregion Page Methods
+
+        #region Report Methods
+
+        public List<Report> GetReports()
         {
-            var testRequest = new RestRequest(string.Format("tests/{0}.xml",testId), Method.GET);
-            var test = ExecuteGet<TestSet>(testRequest);
-            return test;
+            var request = new RestRequest("reports.xml", Method.GET);
+            var reports = ExecuteGet<List<Report>>(request);
+            return reports;
         }
 
-        /// <summary>
-        /// Use Litmus' poll endpoint to see when test results complete.  If no version is passed in default to 1.
-        /// </summary>
-        /// <param name="testSetId"></param>
-        /// <param name="version"></param>
-        /// <returns></returns>
-        public List<Result>PollForTestResults(int testSetId,int version = 1)
+        public ReportContent GetReport(int reportId)
         {
-            var pollRequest = new RestRequest(string.Format("tests/{0}/versions/{1}/poll.xml", testSetId,version), Method.GET);
-            var results = ExecuteGet<List<Result>>(pollRequest);
-            return results;
+            var resource = string.Format("reports/{0}.xml", reportId);
+            var request = new RestRequest(resource, Method.GET);
+            var report = ExecuteGet<ReportContent>(request);
+            return report;
         }
 
-        /// <summary>
-        /// Create an email test and return the TestSet.  In this case you will want to grab the test.TestSetVersions[0].UrlOrGuid
-        /// and send your email into that address.
-        /// </summary>
-        /// <param name="testingApplications"></param>
-        /// <returns></returns>
-        public TestSet CreateEmailTest(List<TestingApplication>testingApplications)
+        public Report CreateReport(string name)
         {
-            return CreateEmailTest(testingApplications, "", "");
+            var request = new RestRequest("reports.xml", Method.POST);
+            request.AddBody(new CreateReportRequest(name));
+            var report = ExecutePost<Report>(request);
+            return report;
         }
 
-        /// <summary>
-        /// Create an email test passing in a subject and body to test.
-        /// </summary>
-        /// <param name="testingApplications"></param>
-        /// <param name="subject"></param>
-        /// <param name="body"></param>
-        /// <returns></returns>
-        public TestSet CreateEmailTest(List<TestingApplication>testingApplications,string subject,string body)
-        {
-            var request = new RestRequest("emails.xml", Method.POST);
-            request.XmlSerializer = new LitmusPostSerializer();
-            request.AddHeader("Accept", "application/xml");
-            request.AddBody(new CreateEmailTestRequest(testingApplications,subject,body));
-            var test = ExecutePost<TestSet>(request);
-            return test; 
-        }
-
-        /// <summary>
-        /// Create a Litmus page test.
-        /// </summary>
-        /// <param name="testingApplications"></param>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        public TestSet CreatePageTest(List<TestingApplication>testingApplications,string url)
-        {
-            var request = new RestRequest("pages.xml", Method.POST);
-            request.XmlSerializer = new LitmusPostSerializer();
-            request.AddHeader("Accept", "application/xml");
-            request.AddBody(new CreatePageTestRequest(testingApplications,url));
-            var test = ExecutePost<TestSet>(request);
-            return test; 
-        }
+        #endregion
 
         /// <summary>
         /// Execute a RestRequest and deserialize into an object using the RestSharp library
@@ -184,7 +229,7 @@ namespace LitmusClient
         /// <param name="request"></param>
         /// <returns></returns>
         private T ExecuteGet<T>(RestRequest request) where T : new()
-        {  
+        {
             var response = restClient.Execute<T>(request);
             return response.Data;
         }
@@ -199,6 +244,13 @@ namespace LitmusClient
         private T ExecutePost<T>(RestRequest request) where T : new()
         {
             var response = restClient.Post(request);
+            var deserializer = new XmlDeserializer();
+            return deserializer.Deserialize<T>(response);
+        }
+
+        private T ExecutePut<T>(RestRequest request) where T : new()
+        {
+            var response = restClient.Put(request);
             var deserializer = new XmlDeserializer();
             return deserializer.Deserialize<T>(response);
         }
