@@ -1,20 +1,20 @@
-using LitmusClient.Litmus;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using LitmusClient.Entities;
 
-namespace LitmusClient
+namespace LitmusClient.RequestBodies
 {
-    public class CreatePageTestRequest : CreateRequest
+    public class CreatePageTestBody
+        : CreateBody
     {
         /// <summary>
         /// Create request for a page test to be sent into Litmus
         /// </summary>
         /// <param name="testingApplications"></param>
         /// <param name="url"></param>
-        public CreatePageTestRequest(List<TestingApplication> testingApplications, string url)
+        public CreatePageTestBody(List<TestingApplication> testingApplications, string url)
         {
-            this.Applications = testingApplications;
-            this.Applications = testingApplications;
+            Applications = testingApplications;
             ExtraElements = new List<XElement>();
             ExtraElements.Add(new XElement("url", url));
         }

@@ -1,6 +1,6 @@
 using System;
 
-namespace LitmusClient.Litmus
+namespace LitmusClient.Entities
 {
     /// <summary>
     /// Class corresponding to the user's Litmus account

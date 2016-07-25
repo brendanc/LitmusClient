@@ -1,9 +1,9 @@
-﻿namespace LitmusClient.Litmus
+﻿namespace LitmusClient.Entities
 {
     public class ReportContent
         : Report
     {
-        public bool PublicSharing { get; set; }
+        public bool? PublicSharing { get; set; }
         public string SharingUrl { get; set; }
         public string ClientUsage { get; set; }
         public string ClientEngagement { get; set; }

@@ -1,5 +1,5 @@
-using RestSharp.Serializers;
 using System;
+using RestSharp.Serializers;
 
 namespace LitmusClient
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace LitmusClient.Litmus
+namespace LitmusClient.Entities
 {
     /// <summary>
     /// Object corresponding to a Litmus test.  TestSets can be for email or web pages.  TestSets can contain multiple versions.
@@ -12,7 +12,7 @@ namespace LitmusClient.Litmus
         public string Name { get; set; }
         public string Service { get; set; }
         public string State { get; set; }
-        public bool IsPublic { get; set; }
+        public bool PublicSharing { get; set; }
         public string UrlOrGuid { get; set; }
         public int Id { get; set; }
 

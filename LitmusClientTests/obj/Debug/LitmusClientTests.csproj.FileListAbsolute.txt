@@ -25,7 +25,6 @@ C:\Users\ext-tmo\Source\Repos\LitmusClient\LitmusClientTests\bin\Debug\LitmusCli
 C:\Users\ext-tmo\Source\Repos\LitmusClient\LitmusClientTests\bin\Debug\LitmusClientTests.pdb
 C:\Users\ext-tmo\Source\Repos\LitmusClient\LitmusClientTests\bin\Debug\LitmusClient.dll
 C:\Users\ext-tmo\Source\Repos\LitmusClient\LitmusClientTests\bin\Debug\RestSharp.dll
-C:\Users\ext-tmo\Source\Repos\LitmusClient\LitmusClientTests\bin\Debug\nunit.core.interfaces.dll
 C:\Users\ext-tmo\Source\Repos\LitmusClient\LitmusClientTests\bin\Debug\LitmusClient.pdb
 C:\Users\ext-tmo\Source\Repos\LitmusClient\LitmusClientTests\bin\Debug\nunit.framework.xml
 C:\Users\ext-tmo\Source\Repos\LitmusClient\LitmusClientTests\bin\Debug\RestSharp.xml

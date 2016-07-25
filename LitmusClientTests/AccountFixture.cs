@@ -1,24 +1,26 @@
-using LitmusClient.Litmus;
+using System;
+using LitmusClient.Entities;
 using NUnit.Framework;
 
 namespace LitmusClientTests
 {
     [TestFixture]
+    [Category("Authorization")]
     public class AccountFixture
     {
-        [Test, ExpectedException(typeof(System.ArgumentException))]
+        [Test, ExpectedException(typeof(ArgumentException))]
         public void NewAccount_WithEmptyUser_ShouldThrow()
         {
             var account = new Account("test", null, "password");
         }
 
-        [Test, ExpectedException(typeof(System.ArgumentException))]
-        public void NewAccount_WithEmptyPassowrd_ShouldThrow()
+        [Test, ExpectedException(typeof(ArgumentException))]
+        public void NewAccount_WithEmptyPassword_ShouldThrow()
         {
             var account = new Account("test", "user", null);
         }
 
-        [Test, ExpectedException(typeof(System.ArgumentException))]
+        [Test, ExpectedException(typeof(ArgumentException))]
         public void NewAccount_WithEmptySubdomain_ShouldThrow()
         {
             var account = new Account(null, "user", "password");
