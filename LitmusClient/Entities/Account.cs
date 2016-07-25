@@ -1,6 +1,6 @@
 using System;
 
-namespace LitmusClient.Litmus
+namespace LitmusClient.Entities
 {
     /// <summary>
     /// Class corresponding to the user's Litmus account
@@ -36,9 +36,9 @@ namespace LitmusClient.Litmus
         /// <param name="subdomain"></param>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        public Account(string subdomain,string username, string password)
+        public Account(string subdomain, string username, string password)
         {
-            if(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(subdomain)) throw new ArgumentException("You must pass a valid user, password and subdomain to create an account.");
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(subdomain)) throw new ArgumentException("You must pass a valid user, password and subdomain to create an account.");
             Subdomain = subdomain;
             Username = username;
             Password = password;

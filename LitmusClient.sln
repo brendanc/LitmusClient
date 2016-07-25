@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitmusClient", "LitmusClient\LitmusClient.csproj", "{9E9903FA-F8BD-429A-AB0F-A54602952DCE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitmusClientTests", "LitmusClientTests\LitmusClientTests.csproj", "{7520C4BE-C745-4FD4-B731-095B3E26AF6A}"

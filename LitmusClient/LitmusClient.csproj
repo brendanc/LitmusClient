@@ -10,10 +10,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LitmusClient</RootNamespace>
     <AssemblyName>LitmusClient</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,32 +33,41 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RestSharp">
-      <HintPath>..\packages\RestSharp.103.2\lib\net4\RestSharp.dll</HintPath>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net45\RestSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateEmailTestRequest.cs" />
-    <Compile Include="CreatePageTestRequest.cs" />
-    <Compile Include="CreateRequest.cs" />
-    <Compile Include="Litmus\Account.cs" />
-    <Compile Include="Litmus\Result.cs" />
-    <Compile Include="Litmus\ResultImage.cs" />
-    <Compile Include="Litmus\TestSet.cs" />
-    <Compile Include="Litmus\TestSetVersion.cs" />
+    <Compile Include="Entities\ResultType.cs" />
+    <Compile Include="RequestBodies\CreateEmailTestBody.cs" />
+    <Compile Include="RequestBodies\CreatePageTestBody.cs" />
+    <Compile Include="RequestBodies\CreateReportBody.cs" />
+    <Compile Include="RequestBodies\CreateBody.cs" />
+    <Compile Include="Entities\CheckState.cs" />
+    <Compile Include="Entities\ImageType.cs" />
+    <Compile Include="Entities\ResultState.cs" />
+    <Compile Include="Entities\Report.cs" />
+    <Compile Include="Entities\ReportContent.cs" />
+    <Compile Include="Entities\StatusEnum.cs" />
+    <Compile Include="RequestBodies\UpdateResultBody.cs" />
+    <Compile Include="RequestBodies\UpdateTestBody.cs" />
+    <Compile Include="Entities\Account.cs" />
+    <Compile Include="Entities\Result.cs" />
+    <Compile Include="Entities\ResultImage.cs" />
+    <Compile Include="Entities\TestSet.cs" />
+    <Compile Include="Entities\TestSetVersion.cs" />
     <Compile Include="LitmusApi.cs" />
     <Compile Include="LitmusPostSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Litmus\TestingApplication.cs" />
+    <Compile Include="Entities\TestingApplication.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
