@@ -12,9 +12,9 @@ namespace LitmusClientTests
 
         #region Credentials
 
-        public const string Subdomain = "decoe243"; //enter your sub domain
-        public const string User = "hugo.raposeira@deco.proteste.pt"; //enter your user name
-        public const string Pass = "deco123456"; //enter your password
+        public const string Subdomain = ; //enter your sub domain
+        public const string User = ; //enter your user name
+        public const string Pass = ; //enter your password
 
         #endregion Credentials
 
