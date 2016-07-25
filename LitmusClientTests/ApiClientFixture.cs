@@ -15,7 +15,7 @@ namespace LitmusClientTests
         [SetUp]
         public void SetUp()
         {
-            _client = new LitmusApi(new Account(LitmusInfo.Subdomain, LitmusInfo.User, LitmusInfo.Pass));
+            _client = new LitmusApi(new Account(LitmusInfo.Subdomain, LitmusInfo.User, LitmusInfo.Password));
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace LitmusClientTests
         [Category("Authorization")]
         public void AccountIsAuthorized_WithInvalidPassword_ShouldReturnFalse()
         {
-            var testClient = new LitmusApi(new Account(LitmusInfo.Subdomain, LitmusInfo.User, LitmusInfo.Pass + "XZXZXZXZX"));
+            var testClient = new LitmusApi(new Account(LitmusInfo.Subdomain, LitmusInfo.User, LitmusInfo.Password + "XZXZXZXZX"));
             Assert.That(testClient.AccountIsAuthorized(), Is.False);
         }
 
@@ -37,7 +37,7 @@ namespace LitmusClientTests
         [Category("Authorization")]
         public void AccountIsAuthorized_WithInvalidSubdomain_ShouldReturnFalse()
         {
-            var testClient = new LitmusApi(new Account(LitmusInfo.Subdomain + "XZXZXZXZX", LitmusInfo.User, LitmusInfo.Pass));
+            var testClient = new LitmusApi(new Account(LitmusInfo.Subdomain + "XZXZXZXZX", LitmusInfo.User, LitmusInfo.Password));
             Assert.That(testClient.AccountIsAuthorized(), Is.False);
         }
 
@@ -52,7 +52,7 @@ namespace LitmusClientTests
         [Category("Authorization")]
         public async Task AccountIsAuthorizedAsync_WithInvalidPassword_ShouldReturnFalse()
         {
-            var testClient = new LitmusApi(new Account(LitmusInfo.Subdomain, LitmusInfo.User, LitmusInfo.Pass + "XZXZXZXZX"));
+            var testClient = new LitmusApi(new Account(LitmusInfo.Subdomain, LitmusInfo.User, LitmusInfo.Password + "XZXZXZXZX"));
             Assert.That(await testClient.AccountIsAuthorizedAsync(), Is.False);
         }
 
@@ -60,7 +60,7 @@ namespace LitmusClientTests
         [Category("Authorization")]
         public async Task AccountIsAuthorizedAsync_WithInvalidSubdomain_ShouldReturnFalse()
         {
-            var testClient = new LitmusApi(new Account(LitmusInfo.Subdomain + "XZXZXZXZX", LitmusInfo.User, LitmusInfo.Pass));
+            var testClient = new LitmusApi(new Account(LitmusInfo.Subdomain + "XZXZXZXZX", LitmusInfo.User, LitmusInfo.Password));
             Assert.That(await testClient.AccountIsAuthorizedAsync(), Is.False);
         }
 
@@ -182,14 +182,20 @@ namespace LitmusClientTests
         {
             var testSet = _client.CreateEmailTest(LitmusInfo.TestEmailClients, LitmusInfo.Subject, LitmusInfo.Body);
             var createdTestSetVersion = _client.CreateTestVersion(testSet.Id);
-            TestSetVersion testSetVersion = null;
+            TestSetVersion poolTestSetVersion = null;
+            var cycles = 0;
             do
             {
                 Thread.Sleep(60 * 1000);
-                testSetVersion = _client.GetTestVersion(testSet.Id, createdTestSetVersion.Version);
-            } while (testSetVersion.Results.First().State != ResultState.Complete);
+                poolTestSetVersion = _client.PollTestVersion(testSet.Id, createdTestSetVersion.Version);
+                cycles++;
+            } while (poolTestSetVersion.Results.Any(r => r.State != ResultState.Complete) || cycles > 5);
+            if (cycles > 5)
+                Assert.Fail("The maximum amount of retries have been reached!");
+            var testSetVersion = _client.GetTestVersion(testSet.Id, createdTestSetVersion.Version);
             AssertHelper.AssertTestSetVersion(testSetVersion, true);
             Assert.AreEqual(createdTestSetVersion.Version, testSetVersion.Version);
+            Assert.AreEqual(ResultState.Complete, testSetVersion.Results.First().State);
         }
 
         [Test]
@@ -198,14 +204,20 @@ namespace LitmusClientTests
         {
             var testSet = await _client.CreateEmailTestAsync(LitmusInfo.TestEmailClients, LitmusInfo.Subject, LitmusInfo.Body);
             var createdTestSetVersion = await _client.CreateTestVersionAsync(testSet.Id);
-            TestSetVersion testSetVersion = null;
+            TestSetVersion poolTestSetVersion = null;
+            var cycles = 0;
             do
             {
                 Thread.Sleep(60 * 1000);
-                testSetVersion = await _client.GetTestVersionAsync(testSet.Id, createdTestSetVersion.Version);
-            } while (testSetVersion.Results.First().State != ResultState.Complete);
+                poolTestSetVersion = await _client.PollTestVersionAsync(testSet.Id, createdTestSetVersion.Version);
+                cycles++;
+            } while (poolTestSetVersion.Results.Any(r => r.State != ResultState.Complete) || cycles > 5);
+            if (cycles > 5)
+                Assert.Fail("The maximum amount of retries have been reached!");
+            var testSetVersion = _client.GetTestVersion(testSet.Id, createdTestSetVersion.Version);
             AssertHelper.AssertTestSetVersion(testSetVersion, true);
             Assert.AreEqual(createdTestSetVersion.Version, testSetVersion.Version);
+            Assert.AreEqual(ResultState.Complete, testSetVersion.Results.First().State);
         }
 
         #endregion Test Set Version Methods

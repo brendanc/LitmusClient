@@ -1,5 +1,6 @@
 using LitmusClient.Entities;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace LitmusClientTests
 {
@@ -8,13 +9,22 @@ namespace LitmusClientTests
     /// </summary>
     public static class LitmusInfo
     {
-        //TODO: Remove account information from tests
-
         #region Credentials
 
-        public const string Subdomain = ; //enter your sub domain
-        public const string User = ; //enter your user name
-        public const string Pass = ; //enter your password
+        public static string Subdomain
+        {
+            get { return ConfigurationManager.AppSettings["Subdomain"]; }
+        }
+
+        public static string User
+        {
+            get { return ConfigurationManager.AppSettings["User"]; }
+        }
+
+        public static string Password
+        {
+            get { return ConfigurationManager.AppSettings["Password"]; }
+        }
 
         #endregion Credentials
 
@@ -37,7 +47,6 @@ namespace LitmusClientTests
             get
             {
                 var emailClients = new List<TestingApplication>();
-                emailClients.Add(new TestingApplication { ApplicationCode = "hotmail", ResultType = "email" });
                 emailClients.Add(new TestingApplication { ApplicationCode = "gmailnew", ResultType = "email" });
                 emailClients.Add(new TestingApplication { ApplicationCode = "notes8", ResultType = "email" });
                 return emailClients;
@@ -50,8 +59,6 @@ namespace LitmusClientTests
             {
                 var pageClients = new List<TestingApplication>();
                 pageClients.Add(new TestingApplication { ApplicationCode = "chrome2", ResultType = "page" });
-                pageClients.Add(new TestingApplication { ApplicationCode = "ie7", ResultType = "page" });
-                pageClients.Add(new TestingApplication { ApplicationCode = "ie6", ResultType = "page" });
                 return pageClients;
             }
         }

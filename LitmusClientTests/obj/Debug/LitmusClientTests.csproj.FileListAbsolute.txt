@@ -31,3 +31,4 @@ C:\Users\ext-tmo\Source\Repos\LitmusClient\LitmusClientTests\bin\Debug\RestSharp
 C:\Users\ext-tmo\Source\Repos\LitmusClient\LitmusClientTests\obj\Debug\LitmusClientTests.csprojResolveAssemblyReference.cache
 C:\Users\ext-tmo\Source\Repos\LitmusClient\LitmusClientTests\obj\Debug\LitmusClientTests.dll
 C:\Users\ext-tmo\Source\Repos\LitmusClient\LitmusClientTests\obj\Debug\LitmusClientTests.pdb
+C:\Users\ext-tmo\Source\Repos\LitmusClient\LitmusClientTests\bin\Debug\LitmusClientTests.dll.config
