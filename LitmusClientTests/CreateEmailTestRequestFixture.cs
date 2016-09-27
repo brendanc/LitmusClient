@@ -17,7 +17,7 @@ namespace LitmusClientTests
             const string xml = @"<test_set>
                                       <applications type=""array"">
                                         <application>
-                                          <code>hotmail</code>
+                                          <code>outlookcom</code>
                                         </application>
                                         <application>
                                           <code>gmailnew</code>
@@ -30,7 +30,7 @@ namespace LitmusClientTests
                                       <use_defaults>false</use_defaults>
                                     </test_set>";
             var emailClients = new List<TestingApplication>();
-            emailClients.Add(new TestingApplication(){ApplicationCode = "hotmail",ResultType = "email"});
+            emailClients.Add(new TestingApplication(){ApplicationCode = "outlookcom",ResultType = "email"});
             emailClients.Add(new TestingApplication() {ApplicationCode = "gmailnew", ResultType = "email"});
             emailClients.Add(new TestingApplication() {ApplicationCode = "notes8", ResultType = "email"});
             var request = new CreateEmailTestRequest(emailClients);
@@ -47,7 +47,7 @@ namespace LitmusClientTests
             const string xml = @"<test_set>
                                       <applications type=""array"">
                                         <application>
-                                          <code>hotmail</code>
+                                          <code>outlookcom</code>
                                         </application>
                                         <application>
                                           <code>gmailnew</code>
@@ -64,7 +64,7 @@ namespace LitmusClientTests
                                       </email_source>
                                     </test_set>";
             var emailClients = new List<TestingApplication>();
-            emailClients.Add(new TestingApplication() { ApplicationCode = "hotmail", ResultType = "email" });
+            emailClients.Add(new TestingApplication() { ApplicationCode = "outlookcom", ResultType = "email" });
             emailClients.Add(new TestingApplication() { ApplicationCode = "gmailnew", ResultType = "email" });
             emailClients.Add(new TestingApplication() { ApplicationCode = "notes8", ResultType = "email" });
             var request = new CreateEmailTestRequest(emailClients, "My test email to Litmus", "<html><body><p>Here is an email body!</p></body></html>");
