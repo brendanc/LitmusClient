@@ -15,6 +15,7 @@ namespace LitmusClient
 
         public LitmusApi(Account account)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             this.restClient = new RestClient(account.LitmusBaseUrl);
             this.restClient.Authenticator = new HttpBasicAuthenticator(account.Username, account.Password);
         }
