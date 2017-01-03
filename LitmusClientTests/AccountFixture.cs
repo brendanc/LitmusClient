@@ -7,22 +7,27 @@ namespace LitmusClientTests
     [TestFixture]
     public class AccountFixture
     {
-        [Test, ExpectedException(typeof(System.ArgumentException))]
+        [Test]
         public void NewAccount_WithEmptyUser_ShouldThrow()
         {
-            var account = new Account("test", null, "password");
+            Assert.Throws<System.ArgumentException>(
+                () => new Account("test", null, "password"));
         }
 
-        [Test, ExpectedException(typeof(System.ArgumentException))]
+        [Test]
         public void NewAccount_WithEmptyPassowrd_ShouldThrow()
         {
-            var account = new Account("test", "user", null);
+            Assert.Throws<System.ArgumentException>(
+                () => new Account("test", "user", null));
+
         }
 
-        [Test, ExpectedException(typeof(System.ArgumentException))]
+        [Test]
         public void NewAccount_WithEmptySubdomain_ShouldThrow()
         {
-            var account = new Account(null, "user", "password");
+            Assert.Throws<System.ArgumentException>(
+                () => new Account(null, "user", "password"));
+
         }
 
         [Test]
