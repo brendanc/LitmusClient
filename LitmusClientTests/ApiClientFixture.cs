@@ -156,7 +156,7 @@ namespace LitmusClientTests
         /// This test will actually create a blank Litmus test so it is set to ignore otherwise we would have to grab the
         /// email address and send in an email. 
         /// </summary>
-        [Test,Ignore]
+        [Test]
         public void CreateEmailTest_WithValidCredentials_ShouldCreateLitmusEmailTest()
         {
             var emailClients = new List<TestingApplication>();
@@ -174,9 +174,9 @@ namespace LitmusClientTests
         public void CreateEmailTest_WithSubjectAndBody_ShouldCreateLitmusEmailTest()
         {
             var emailClients = new List<TestingApplication>();
-            emailClients.Add(new TestingApplication() { ApplicationCode = "hotmail", ResultType = "email" });
+            emailClients.Add(new TestingApplication() { ApplicationCode = "chromegmailnew", ResultType = "email" });
             emailClients.Add(new TestingApplication() { ApplicationCode = "gmailnew", ResultType = "email" });
-            emailClients.Add(new TestingApplication() { ApplicationCode = "notes8", ResultType = "email" });
+            emailClients.Add(new TestingApplication() { ApplicationCode = "ffgmailnew", ResultType = "email" });
             var subject = string.Format("Test email created by c# wrapper on {0}", DateTime.Now);
             var test = client.CreateEmailTest(emailClients, subject, "<html><body><p>This is a kitten:</p><img src=\"http://placekitten.com/200/300\" alt=\"kitten\"></img></body></html>");
             Thread.Sleep(20000);
