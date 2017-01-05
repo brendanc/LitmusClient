@@ -3,6 +3,7 @@ using System.Net;
 using LitmusClient.Litmus;
 using RestSharp;
 using RestSharp.Deserializers;
+using RestSharp.Authenticators;
 
 namespace LitmusClient
 {
