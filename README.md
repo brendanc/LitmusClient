@@ -20,19 +20,6 @@ var test = client.CreateEmailTest(emailClients, subject, "<html><body><p>This is
 
 ```
 
-_Create a Litmus Page Test_ 
-
-```c#
-var client = new LitmusApi(new Account("YourSubDomain", "YourUserName", "YourPassword"));            
-var pageClients = new List<TestingApplication>();
-pageClients.Add(new TestingApplication() { ApplicationCode = "chrome2", ResultType = "page" });
-pageClients.Add(new TestingApplication() { ApplicationCode = "ie7", ResultType = "page" });
-pageClients.Add(new TestingApplication() { ApplicationCode = "ie6", ResultType = "page" });
-var url = "http://github.com";
-var test = client.CreatePageTest(pageClients, url);
-
-```
-
 _If you just want to use this library in your application:_
 
 - Download it from NuGet:  http://nuget.org/packages/LitmusClient/
